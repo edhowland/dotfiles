@@ -1,0 +1,47 @@
+# .functions - shell functions at startup
+
+# on - start time keeping for project:
+on() {
+  date +"start |%d/%m/%y|%H:%M:%S|%s|$*" >>~/.cards/time
+}
+
+# off - stop timekeeping for project
+off() {
+  date +"finish |%d/%m/%y|%H:%M:%S|%s|$*" >>~/.cards/time
+}
+
+
+beg() {
+  dir="~/.cards/`date +'%y/%m/%d'`/$1"
+
+  echo $dir
+}
+
+# get the middle of a file
+mid() {
+  tf=$(echo $2 - $1 | bc)
+  head -${2} $3 | tail -${tf}
+}
+
+
+# Edit and a Ruby file and chekc its syntax
+vr ()
+{
+    vi $1 $2;
+    [ "$2" ] && shift;
+  sleep 1
+    ruby -c $1
+}
+
+# commit
+gam() {
+	git commit -am "$*"
+}
+gam () 
+{ 
+    git commit -am "$*"
+}
+pssh () 
+{ 
+    ping -c 5 $(~/bin/ssh_config_host.rb $1)
+}
