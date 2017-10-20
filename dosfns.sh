@@ -6,9 +6,11 @@ extpart() {
   echo ${1#*.}
 }
 alias final='for last; do true;done'
+# ren *.bat *.old : Acts like DOS command, downgrades gracefully to mv if needed
 ren () 
 { 
   final
+  [[ $last =~ \* ]] || { mv $@ ; return $? ;}
   xt=$(extpart $last)
   first=$1
   fpt=$(filepart $first)
@@ -19,10 +21,12 @@ xpt=$(extpart $first)
     done
 }
 #
-# copy *.old *.new
+# copy *.bat *.old : Acts like DOS command, downgrades gracefully to cp if needed
+
 copy () 
 { 
   final
+  [[ $last =~ \* ]] || { cp $@ ; return $? ;}
   xt=$(extpart $last)
   first=$1
   fpt=$(filepart $first)
