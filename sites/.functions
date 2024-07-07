@@ -1,0 +1,40 @@
+sites.select () 
+{ 
+    echo "select $1 from urls where name = \"$2\";" | sqlite3 sites.db
+}
+# run the command captured from the SQL query of the pass_cmd for site
+sites.pass() {
+  cmd=$(sites.select pass_cmd $1)
+  $cmd | pbcopy
+}
+sites.select.clip() {
+  sites.select $1 $2 | pbcopy
+}
+sites.notes.clip() {
+  sites.select notes "$1" | pbcopy
+}
+sites.insert() {
+  echo "insert into urls values (\"$1\", \"$2\", \"$3\", \"$4\", \"$5\");" | sqlite3 sites.db
+}
+# add an existing pass and insert it into the DB
+sites.add() {
+  name="$1"; url="$2"; user="$3"
+  pass add $name
+echo Password added, now creating the database entry with: $name $url $user "pass show ${name}"
+  sites.insert "$name" "$url" "$user" "pass show ${name}"
+}
+# create a new password entry with pass generate
+sites.create() {
+  name="$1"; url="$2"; user="$3"
+  pass generate $name
+  echo password generated for $name now adding it to db
+   sites.insert "$name" "$url" "$user" "pass show ${name}"
+}
+mkalias() {
+  name="$1"
+  for i in url user pass
+  do
+    echo "alias ${name}.${i}='sites.${i} ${name}'" >> my.aliases
+  done
+}
+

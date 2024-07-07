@@ -1,0 +1,5 @@
+alias sites.url='sites.select.clip url'
+alias sites.user='sites.select.clip user'
+alias sites.notes='sites.select notes'
+alias sites.show.all='echo "select * from urls;" | sqlite3 sites.db'
+alias clear.pb='echo -n "" | pbcopy'

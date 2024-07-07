@@ -1,0 +1,6 @@
+# source this file to enable stuff in viper/ viper.wiki/
+source .viper_path
+source .aliases
+test -f .functions && source .functions
+source .env
+echo aliases and PATH set

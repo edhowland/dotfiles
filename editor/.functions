@@ -1,0 +1,26 @@
+chr() {
+  [ "$1" -lt 256 ] || return 1
+  printf   "\\$(printf '%03o' "$1")"
+}
+
+ord() {
+  LC_CTYPE=C printf '%d' "'$1"
+}
+vl () 
+{ 
+    vm -l $2 $1
+}
+rt () 
+{ 
+    ( cd minitest;
+    ruby test_${1}.rb )
+}
+vr () 
+{ 
+    viper minitest/test_${1}.rb lib/runtime/${1}.rb
+}
+unalias vt
+
+vt() {
+    viper minitest/test_${2}.rb lib/${1}/${2}.rb
+}

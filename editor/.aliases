@@ -1,0 +1,4 @@
+# this is temporary
+alias vm='TERM_PROGRAM=xterm viper'
+alias vt='vm'
+alias scratch='vm -e scratch'

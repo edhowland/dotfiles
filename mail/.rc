@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# source this file
+source .functions
+source .alias
+
+echo aliases and functions set up for mail
+echo 'mx.create <file>; mx.msg.to <file>; mx.msg.body <file>'

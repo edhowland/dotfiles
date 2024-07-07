@@ -1,0 +1,29 @@
+mx.msg.body () 
+{ 
+    local fname="$1";
+    bat -p -r 3: ${fname} | pbcopy
+}
+mx.msg.to () 
+{ 
+    local fname="$1";
+    bat -p -r 1:1 ${fname} | pbcopy
+}
+mx.addr () 
+{ 
+    cat *.addr | pbcopy
+}
+mx.create () 
+{ 
+    addr=$(ls *.addr);
+    mx.new $addr $1
+  $EDITOR -l 5 $1
+}
+mx.new () 
+{ 
+    local to="$1" fname="$2";
+    if [ -f ${to} ]; then
+        echo -e "$(cat $to)\n=====\n" > ${fname};
+    else
+        echo -e "${to}\n=====\n" > ${fname};
+    fi
+}

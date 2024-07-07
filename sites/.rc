@@ -1,0 +1,5 @@
+# .rc : source this file
+source .functions
+source .aliases
+echo aliases and functions set
+echo Remember that all .user, .url and .pass place db output in  in clipboard
